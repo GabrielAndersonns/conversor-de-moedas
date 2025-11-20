@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.InputMismatchException;
 
 public class ConsultaMoeda {
     public Moedas buscaMoeda(String coin){
@@ -24,6 +25,11 @@ public class ConsultaMoeda {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        catch (InputMismatchException e){
+            System.out.println("Valor inválido");
+            System.out.println(e.getMessage());
+        }
+
         return new Gson().fromJson(response.body(), Moedas.class);
     }
 
